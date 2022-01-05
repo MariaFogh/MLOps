@@ -1,10 +1,10 @@
 import argparse
 import sys
-import torch
-from torch import nn
-from model import MyAwesomeModel
-from torch import optim
+import os
 import matplotlib.pyplot as plt
+import torch
+from model import MyAwesomeModel
+from torch import nn, optim
 
 
 def train():
@@ -17,9 +17,7 @@ def train():
 
     # TODO: Implement training loop here
     model = MyAwesomeModel()
-    train = torch.load(
-        "/Users/maria/example_cookiecutter_project/data/processed/traindata.pt"
-    )
+    train = torch.load("/data/processed/traindata.pt")
     train_set = torch.utils.data.DataLoader(train, batch_size=64, shuffle=True)
 
     model.train()
@@ -48,13 +46,12 @@ def train():
 
         train_loss.append(running_loss / len(train_set))
 
-    filename = "/Users/maria/example_cookiecutter_project/models/trained_model.pt"
-    torch.save(model, filename)
+    os.makedirs("models/", exist_ok=True)
+    torch.save(model, "models/trained_model.pt")
 
     plt.plot(train_loss)
-    plt.savefig(
-        "/Users/maria/example_cookiecutter_project/reports/figures/learningcurve.png"
-    )
+    os.makedirs("reports/figures/", exist_ok=True)
+    plt.savefig("reports/figures/learningcurve.png")
 
 
 if __name__ == "__main__":

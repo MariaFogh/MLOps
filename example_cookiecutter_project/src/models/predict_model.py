@@ -1,5 +1,6 @@
 import argparse
 import sys
+
 import torch
 from torch import optim
 
@@ -14,9 +15,7 @@ def predict():
 
     # TODO: Implement evaluation logic here
     model = torch.load(args.load_model_from)
-    test = torch.load(
-        "/Users/maria/example_cookiecutter_project/data/processed/testdata.pt"
-    )
+    test = torch.load("/data/processed/testdata.pt")
     test_set = torch.utils.data.DataLoader(test, batch_size=64, shuffle=True)
 
     with torch.no_grad():

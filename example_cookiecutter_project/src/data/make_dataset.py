@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-import click
 import logging
 from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
-from torch.utils.data import TensorDataset
+
+import click
+import numpy as np
 import torch
 import torch.nn.functional as F
+from dotenv import find_dotenv, load_dotenv
 from numpy import load
-import numpy as np
+from torch.utils.data import TensorDataset
+
 
 @click.command()
 @click.argument('input_filepath', type=click.Path(exists=True))
